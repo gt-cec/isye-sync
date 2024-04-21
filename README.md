@@ -20,7 +20,7 @@ As of April 21, 2024, here is the status of the ISYE-hosted projects:
 
 | Project | Status | Domain | CEC Repo | ISYE Repo | Type | People |
 | :-- | :-: | :-: | :-: | :-: | :-: | :-: |
-| ASMM | - | asmm.cec.gatech.edu | github.com/gt-cec/asmm | github.gatech.edu/isye-web/cec-asmm | JACO (Java) | Kolb, Srivastava |
+| ASMM | - | asmm.cec.gatech.edu | github.com/gt-cec/asmm | github.gatech.edu/isye-web/cec-asmm | JATOS (Java) | Kolb, Srivastava |
 | MAISR | - | maisr.cec.gatech.edu | github.com/gt-cec/maisr | github.gatech.edu/isye-web/cec-maisr | Flask (Python) | Agbeyibor, Kolb |
 | ONR-ISR | - | onr-isr.cec.gatech.edu | github.com/gt-cec/onr-isr | github.gatech.edu/isye-web/cec-onr-isr | Flask (Python) | Agbeyibor, Kolb |
 | TMM-HAI | In progress | tmm-hai.cec.gatech.edu | github.com/gt-cec/tmm-hai | github.gatech.edu/isye-web/cec-tmm-hai | Flask (Python) | Kolb |
@@ -29,13 +29,25 @@ As of April 21, 2024, here is the status of the ISYE-hosted projects:
 
 ### Using a webserver for your project
 
-Most of our projects use flask (Python) or JACO (Java). Our projects typically require two sets of dependencies: system dependencies (`apt-get install XXX`) and language-specific libraries (`pip install XXX`).
+Most of our projects use flask (Python) or JATOS (Java). Our projects typically require two sets of dependencies: system dependencies (`apt-get install XXX`) and language-specific libraries (`pip install XXX`).
 
 ISYE's VM runs Red Hat Enterprise Linux (RHEL). RHEL is Debian-based, like Ubuntu, so for most purposes they are identical. The most significant difference is that Ubuntu's package manager is called `apt`, while RHEL's is called `yum`. Most packages on Ubuntu have an equivalent on RHEL.
 
+Some libraries advertise support for CentOS, which is an open source version of RHEL.
+
 For our projects to run on the VM, we need to include three files at the top level of our project.
 
-1. `pip-requirements.txt` is a simple list of `pip` packages to install, for example:
+1. `yum-requirements.txt` is a simple list of `yum` packages to install, for example:
+
+```
+pytorch
+gdb
+jatos
+```
+
+If a package is not available on yum, 
+
+2. `pip-requirements.txt` is a simple list of `pip` packages to install, for example:
 
 ```
 matplotlib
@@ -46,12 +58,6 @@ numpy==1.0.2
 ```
 
 Note how I specified a NumPy version. You can follow that format for any version-specific packages.
-
-2. `yum-requirements.txt` is a simple list of `yum` packages to install, for example:
-
-```
-pytorch
-```
 
 If your project does not already have an ISYE repo, email `helpdesk@isye.gatech.edu` and ask for a repo on the isye-web organization.
 
