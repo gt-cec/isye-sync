@@ -29,7 +29,7 @@ As of April 21, 2024, here is the status of the ISYE-hosted projects:
 
 ### Setting up your project for deployment
 
-**The first thing to do is remove all API keys, usernames/passwords, and user data from your codebase.** API keys, username, and passwords should always be [environment variables](https://www.freecodecamp.org/news/how-to-set-an-environment-variable-in-linux/).
+**The first thing to do is remove all API keys, usernames/passwords, and user data from your codebase.** API keys, username, and passwords should always be [environment variables](https://www.freecodecamp.org/news/how-to-set-an-environment-variable-in-linux/). For IRB purposes, user data should never be on GitHub, which you can ensure by [making a `.gitignore` file that includes the log files](https://www.w3schools.com/git/git_ignore.asp?remote=github).
 
 Most of our projects use flask (Python) or JATOS (Java). Our projects typically require two sets of dependencies: system dependencies (`apt-get install XXX`) and language-specific libraries (`pip install XXX`).
 
