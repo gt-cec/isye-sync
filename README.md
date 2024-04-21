@@ -27,7 +27,9 @@ As of April 21, 2024, here is the status of the ISYE-hosted projects:
 | TMM-HRI | - | tmm-hri.cec.gatech.edu | github.com/gt-cec/tmm-hri | github.gatech.edu/isye-web/cec-tmm-hri | - | Kolb |
 | TMM-MAS | - | tmm-mas.cec.gatech.edu | github.com/gt-cec/tmm-mas | github.gatech.edu/isye-web/cec-tmm-mas | - | Alag |
 
-### Using a webserver for your project
+### Setting up your project for deployment
+
+*The first thing to do is remove all API keys, usernames/passwords, and user data from your codebase.* 
 
 Most of our projects use flask (Python) or JATOS (Java). Our projects typically require two sets of dependencies: system dependencies (`apt-get install XXX`) and language-specific libraries (`pip install XXX`).
 
@@ -41,15 +43,16 @@ For our projects to run on the VM, we need to include three files at the top lev
 
 ```
 python3.9
+openjdk11
 ```
 
 Only include packages that are strictly required for your server to run. Most of the usual packages (Python, Java) will already be installed by the VM. For example, at the time of writing OpenCV is not compatible with Python 3.10+, so I would specify python3.9 here and let ISYE helpdesk know.
 
 If a package is not available on `yum` and there is a Linux version available, just email a link to the package's website to ISYE helpdesk and ask if they can install it on the VM.
 
-This text file isn't used automatically — the ISYE staff install the packages manually. It just helps to have all the `yum` dependencies in one place so they know what to install.
+This text file is not run automatically — the ISYE staff install the packages manually. It just helps to have all the `yum` dependencies in one place so they know what to install.
 
-2. Similarly, `pip-requirements.txt` is a simple list of `pip` packages to install, for example:
+2. `pip-requirements.txt` is a simple list of `pip` packages to install, for example:
 
 ```
 matplotlib
@@ -89,10 +92,17 @@ python webserver.py
 In `webserver.py`, the variable can be accessed by:
 
 ```
-port = int(os.getEnviron("PORT", 80))  # gets the PORT env var, or defaults to 80
+port = int(os.getenv("PORT", default=80))  # gets the PORT env var, or defaults to 80
 ```
 
-Remember that the `run.sh` script does not have `sudo` access! You should not need sudo access for anything.
+Remember that the `run.sh` script does not have `sudo` access! You should not need sudo access for anything, and if you do, restructure your project so you do not.
+
+
+### Getting an ISYE GitHub repo
+
+The 
+
+
 
 If your project does not already have an ISYE repo, email `helpdesk@isye.gatech.edu` and ask for a repo on the isye-web organization.
 
