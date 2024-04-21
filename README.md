@@ -31,23 +31,25 @@ As of April 21, 2024, here is the status of the ISYE-hosted projects:
 
 Most of our projects use flask (Python) or JATOS (Java). Our projects typically require two sets of dependencies: system dependencies (`apt-get install XXX`) and language-specific libraries (`pip install XXX`).
 
-ISYE's VM runs Red Hat Enterprise Linux (RHEL). RHEL is Debian-based, like Ubuntu, so for most purposes they are identical. The most significant difference is that Ubuntu's package manager is called `apt`, while RHEL's is called `yum`. Most packages on Ubuntu have an equivalent on RHEL.
+ISYE's VM runs Red Hat Enterprise Linux (RHEL). RHEL is Debian-based, like Ubuntu, so for most purposes they are identical. Ubuntu's package manager is called `apt`, while RHEL's is called `yum`.
 
-Some libraries advertise support for CentOS, which is an open source version of RHEL.
+Most `apt` packages have an equivalent on `yum`, or have a downloadable `.rpm` package that can be installed with `yum`. Some libraries advertise support for CentOS, which is an open source version of RHEL and is probably compatible.
 
 For our projects to run on the VM, we need to include three files at the top level of our project.
 
 1. `yum-requirements.txt` is a simple list of `yum` packages to install, for example:
 
 ```
-pytorch
-gdb
-jatos
+python3.9
 ```
 
-If a package is not available on yum, 
+Only include packages that are strictly required for your server to run. Most of the usual packages (Python, Java) will already be installed by the VM. For example, at the time of writing OpenCV is not compatible with Python 3.10+, so I would specify python3.9 here and let ISYE helpdesk know.
 
-2. `pip-requirements.txt` is a simple list of `pip` packages to install, for example:
+If a package is not available on `yum` and there is a Linux version available, just email a link to the package's website to ISYE helpdesk and ask if they can install it on the VM.
+
+This text file isn't used automatically — the ISYE staff install the packages manually. It just helps to have all the `yum` dependencies in one place so they know what to install.
+
+2. Similarly, `pip-requirements.txt` is a simple list of `pip` packages to install, for example:
 
 ```
 matplotlib
@@ -57,7 +59,40 @@ pygame
 numpy==1.0.2
 ```
 
-Note how I specified a NumPy version. You can follow that format for any version-specific packages.
+Note how I specified a NumPy version. You can follow that format for any version-specific packages. Packages without a version specified will use their latest version.
+
+The `pip` requirements are installed automatically from this text file.
+
+If you are not using `pip` or Python, this file can be ignored. Email the ISYE helpdesk if you need anything else installed.
+
+3. `run.sh` is a bash script that the VM will run to start the webserver, for example:
+
+```
+python webserver.py
+```
+
+You can test this bash file on your local machine.
+
+We use this `run.sh` file so that launching is standardized across all projects, and so that you can set up environment variables or command line arguments if you would like. For example, if I set up my webserver to take in a `demo=` parameter to decide whether to skip the consent form, my `run.sh` could look like:
+
+```
+python webserver.py demo=true
+```
+
+It is common to use environment variables to indicate which port the server should listen on. I strongly recommend doing this because ISYE will give you a port to use for your server. To set the `PORT` environment variable, for example:
+
+```
+export PORT=567
+python webserver.py
+```
+
+In `webserver.py`, the variable can be accessed by:
+
+```
+port = int(os.getEnviron("PORT", 80))  # gets the PORT env var, or defaults to 80
+```
+
+Remember that the `run.sh` script does not have `sudo` access! You should not need sudo access for anything.
 
 If your project does not already have an ISYE repo, email `helpdesk@isye.gatech.edu` and ask for a repo on the isye-web organization.
 
