@@ -20,12 +20,12 @@ As of April 21, 2024, here is the status of the ISYE-hosted projects:
 
 | Project | Status | Domain | CEC Repo | ISYE Repo | Type | People |
 | :-- | :-: | :-: | :-: | :-: | :-: | :-: |
-| ASMM | asmm.cec.gatech.edu | github.com/gt-cec/asmm | github.gatech.edu/isye-web/cec-asmm | JACO (Java) | Kolb, Srivastava |
-| MAISR | Not yet hosted | maisr.cec.gatech.edu | github.com/gt-cec/maisr | github.gatech.edu/isye-web/cec-maisr | Flask (Python) | Agbeyibor, Kolb |
-| ONR-ISR | Not yet hosted | onr-isr.cec.gatech.edu | github.com/gt-cec/onr-isr | github.gatech.edu/isye-web/cec-onr-isr | Flask (Python) | Agbeyibor, Kolb |
+| ASMM | - | asmm.cec.gatech.edu | github.com/gt-cec/asmm | github.gatech.edu/isye-web/cec-asmm | JACO (Java) | Kolb, Srivastava |
+| MAISR | - | maisr.cec.gatech.edu | github.com/gt-cec/maisr | github.gatech.edu/isye-web/cec-maisr | Flask (Python) | Agbeyibor, Kolb |
+| ONR-ISR | - | onr-isr.cec.gatech.edu | github.com/gt-cec/onr-isr | github.gatech.edu/isye-web/cec-onr-isr | Flask (Python) | Agbeyibor, Kolb |
 | TMM-HAI | In progress | tmm-hai.cec.gatech.edu | github.com/gt-cec/tmm-hai | github.gatech.edu/isye-web/cec-tmm-hai | Flask (Python) | Kolb |
-| TMM-HRI | Not yet hosted | tmm-hri.cec.gatech.edu | github.com/gt-cec/tmm-hri | github.gatech.edu/isye-web/cec-tmm-hri | - | Kolb |
-| TMM-MAS | Not yet hosted | tmm-mas.cec.gatech.edu | github.com/gt-cec/tmm-mas | github.gatech.edu/isye-web/cec-tmm-mas | - | Alag |
+| TMM-HRI | - | tmm-hri.cec.gatech.edu | github.com/gt-cec/tmm-hri | github.gatech.edu/isye-web/cec-tmm-hri | - | Kolb |
+| TMM-MAS | - | tmm-mas.cec.gatech.edu | github.com/gt-cec/tmm-mas | github.gatech.edu/isye-web/cec-tmm-mas | - | Alag |
 
 Most of our projects so far have used flask (Python) or JACO (Java).
 
