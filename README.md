@@ -145,13 +145,17 @@ To do this, we will use GitHub Actions. GitHub Actions is a service where you ca
 
 In our case, we want a Workflow that is triggered when we push to the CEC repo's `production` branch, and that has the VM:
 
-1. Pull the `production` branch of the CEC repo.
+1. Clone the `production` branch of the CEC repo.
 2. Push it to the `main` branch of the ISYE repo.
 
 Lucky for you, 99% of that work is already done.
 
-Simply make a new file in `.github/workflows/mirror.yml` and copy in the below script:
+In your codebase, make a new file in `.github/workflows/mirror.yml` and copy in the below script. See [this repository](https://github.com/gt-cec/tmm-hai) as an example.
 
+```
+
+
+```
 
 If your project does not already have an ISYE repo, email `helpdesk@isye.gatech.edu` and ask for a repo on the isye-web organization.
 
