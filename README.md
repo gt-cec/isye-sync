@@ -153,9 +153,47 @@ Lucky for you, 99% of that work is already done.
 In your codebase, make a new file in `.github/workflows/mirror.yml` and copy in the below script. See [this repository](https://github.com/gt-cec/tmm-hai) as an example.
 
 ```
+name: Mirror Branch to ISYE
 
+on:
+  push:
+    branches:
+      - production
 
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone CEC repo
+        run: git clone --branch production ${{ github.server_url }}/${{ github.repository }}
+
+      - name: Add ISYE repo as an upstream remote
+        run: |
+          cd ${{ github.event.repository.name }}
+          git remote add mirror https://${{ vars.ISYE_MIRROR_USER }}:${{ secrets.ISYE_MIRROR_TOKEN }}@${{ vars.ISYE_MIRROR_REPO }}
+
+      - name: Remove the .github folder to avoid a recursive workflow
+        run: |
+          cd ${{ github.event.repository.name }}
+          rm -rf .github
+
+      - name: Commit the change
+        run: |
+          cd ${{ github.event.repository.name }}
+          git config --global user.email ""
+          git config --global user.name "GitHub Actions"
+          git commit -a -m "[GitHub Action] Synced with CEC parent repo"
+
+      - name: Push CEC production branch to ISYE main branch
+        run: |
+          cd ${{ github.event.repository.name }}
+          git push mirror production:main --force
 ```
+
+The script is fairly straightforward, it just does the command line commands you would run yourself to relay the CEC repo's `production` branch to the ISYE repo's `main` branch.
+
+**Your main takeaway should be that this script relies on three environment variables set up through GitHub:** `ISYE_MIRROR_USER`, `ISYE_MIRROR_TOKEN`, and `ISYE_MIRROR_REPO`.
 
 If your project does not already have an ISYE repo, email `helpdesk@isye.gatech.edu` and ask for a repo on the isye-web organization.
 
