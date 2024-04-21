@@ -29,7 +29,11 @@ As of April 21, 2024, here is the status of the ISYE-hosted projects:
 
 ### Setting up your project for deployment
 
-**The first thing to do is remove all API keys, usernames/passwords, and user data from your codebase.** API keys, username, and passwords should always be [environment variables](https://www.freecodecamp.org/news/how-to-set-an-environment-variable-in-linux/). For IRB purposes, user data should never be on GitHub, which you can ensure by [making a `.gitignore` file that excludes the log files](https://www.w3schools.com/git/git_ignore.asp?remote=github).
+The goal of this section is to set up your codebase so ISYE knows what external packages to install, 
+
+**The first thing to do is remove all API keys, usernames/passwords, and user data from your codebase.** API keys, username, and passwords should always be [environment variables](https://www.freecodecamp.org/news/how-to-set-an-environment-variable-in-linux/). For IRB purposes, user data should never be on GitHub, which you can ensure by [making a `.gitignore` file that excludes the log files](https://www.w3schools.com/git/git_ignore.asp?remote=github). If you have already added sensitive info to GitHub, you can [squash your repository](https://stackoverflow.com/a/9254257) so people cannot go through the commit history and retrieve it.
+
+Once your codebase and GitHub repository are clean from things that could get you an angry email from the IRB, you can proceed.
 
 Most of our projects use flask (Python) or JATOS (Java). Our projects typically require two sets of dependencies: system dependencies (`apt-get install XXX`) and language-specific libraries (`pip install XXX`).
 
@@ -44,13 +48,14 @@ For our projects to run on the VM, we need to include three files at the top lev
 ```
 python3.9
 openjdk11
+Tesseract 5, from https://tesseract-ocr.github.io/tessdoc/Installation.html
 ```
 
-Only include packages that are strictly required for your server to run. Most of the usual packages (Python, Java) will already be installed by the VM. For example, at the time of writing OpenCV is not compatible with Python 3.10+, so I would specify python3.9 here and let ISYE helpdesk know.
+Only include packages that are strictly required for your server to run. Most of the usual packages (Python, Java) will already be installed by the VM. For example, at the time of writing OpenCV is not compatible with Python 3.10+, so I would specify python3.9 here.
 
-If a package is not available on `yum` and there is a Linux version available, just email a link to the package's website to ISYE helpdesk and ask if they can install it on the VM.
+If a package is not available on `yum` and there is a Linux version available, just include a link to the package's website, like I did for Tesseract.
 
-This text file is not run automatically — the ISYE staff install the packages manually. It just helps to have all the `yum` dependencies in one place so they know what to install.
+This text file is not run automatically — the ISYE staff install the packages manually. It just helps to have all the `yum` dependencies in one place so they (and our future labmates) know what to install.
 
 2. `pip-requirements.txt` is a simple list of `pip` packages to install, for example:
 
