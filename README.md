@@ -132,6 +132,25 @@ Would you be able to help me with this? Thanks!"*
 
 ISYE's IT staff are lovely. If you are confused about how any of this works, first try to educate yourself (ChatGPT is very useful for general IT questions), second ask the labmates, and third ask them for clarification.
 
+When you get the port number from ISYE, change your `run.sh` script or webserver code to use that port. Say ISYE assigns your project the port 1234. Behind the scenes, ISYE is directing traffic from the subdomain (e.g., asmm.cec.gatech.edu port 443, the default HTTPS port) to the VM at port 1234. Your webserver therefore needs to listen to port 1234.
+
+
+### Link the CEC repo to the ISYE repo
+
+At this point you have a codebase that is ready to deploy to ISYE's infrastructure, you know what port your server needs to listen on, and you have a GitHub repo on the `isye-web` organization.
+
+All that is left is to set up the `production` branch of your CEC repo to automatically mirror to the ISYE repo.
+
+To do this, we will use GitHub Actions. GitHub Actions is a service where you can trigger GitHub to launch a small VM and run a script (called a "Workflow").
+
+In our case, we want a Workflow that is triggered when we push to the CEC repo's `production` branch, and that has the VM:
+
+1. Pull the `production` branch of the CEC repo.
+2. Push it to the `main` branch of the ISYE repo.
+
+Lucky for you, 99% of that work is already done.
+
+Simply make a new file in `.github/workflows/mirror.yml` and copy in the below script:
 
 
 If your project does not already have an ISYE repo, email `helpdesk@isye.gatech.edu` and ask for a repo on the isye-web organization.
