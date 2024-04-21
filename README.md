@@ -29,7 +29,7 @@ As of April 21, 2024, here is the status of the ISYE-hosted projects:
 
 ### Setting up your project for deployment
 
-The goal of this section is to set up your codebase so ISYE knows what external packages to install, 
+The goal of this section is to set up your codebase so ISYE knows what external packages to install and so all the VM has to do is run a bash script to start your project webserver.
 
 **The first thing to do is remove all API keys, usernames/passwords, and user data from your codebase.** API keys, username, and passwords should always be [environment variables](https://www.freecodecamp.org/news/how-to-set-an-environment-variable-in-linux/). For IRB purposes, user data should never be on GitHub, which you can ensure by [making a `.gitignore` file that excludes the log files](https://www.w3schools.com/git/git_ignore.asp?remote=github). If you have already added sensitive info to GitHub, you can [squash your repository](https://stackoverflow.com/a/9254257) so people cannot go through the commit history and retrieve it.
 
@@ -49,6 +49,7 @@ For our projects to run on the VM, we need to include three files at the top lev
 python3.9
 openjdk11
 Tesseract 5, from https://tesseract-ocr.github.io/tessdoc/Installation.html
+dotnet
 ```
 
 Only include packages that are strictly required for your server to run. Most of the usual packages (Python, Java) will already be installed by the VM. For example, at the time of writing OpenCV is not compatible with Python 3.10+, so I would specify python3.9 here.
@@ -102,10 +103,34 @@ port = int(os.getenv("PORT", default=80))  # gets the PORT env var, or defaults 
 
 Remember that the `run.sh` script does not have `sudo` access! You should not need sudo access for anything, and if you do, restructure your project so you do not.
 
+When your project is clean and you have tested your `run.sh` script, make a new branch called `production`. This branch will be the code that is deployed, so in the future if you update `main` and are ready for the changes to be published, simply rebase the `production` branch onto `main` (or delete the `production` branch and remake it).
 
-### Getting an ISYE GitHub repo
 
-The 
+### Getting an ISYE GitHub repo and domain name
+
+ISYE wants their VM to pull from ISYE's GitHub to make management cleaner on their end. As shown in the projects table, each project has a repo with CEC and a repo with ISYE. 
+
+ISYE IT is very responsive, and as a relatively small IT group, you can walk to Groseclose and meet with them directly. Please run all communication through their ticketing system, `helpdesk@isye.gatech.edu`.
+
+You need the following from ISYE:
+
+1. An ISYE GitHub repo for your project (under https://github.gatech.edu/isye-web).
+
+2. A public domain name for your project (e.g., tmm-hai.cec.gatech.edu).
+
+3. A port to use for your project.
+
+Here is an example email you could send ISYE:
+
+*"Hi! I am a PhD student working with Karen Feigh in the Cognitive Engineering Center. We publicly host a few project demos through a VM managed by ISYE, and I am looking to add another project in the same manner.
+
+The project is codenamed ASMM, and its codebase is located at https://github.com/gt-cec/asmm. My GT username is jkolb6.
+
+I believe the project needs a repo on the isye-web GitHub, a domain name (ideally asmm.cec.gatech.edu), and a port to configure my project's webserver to listen on.
+
+Would you be able to help me with this? Thanks!"*
+
+ISYE's IT staff are lovely. If you are confused about how any of this works, first try to educate yourself (ChatGPT is very useful for general IT questions), second ask the labmates, and third ask them for clarification.
 
 
 
