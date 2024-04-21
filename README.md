@@ -27,7 +27,31 @@ As of April 21, 2024, here is the status of the ISYE-hosted projects:
 | TMM-HRI | - | tmm-hri.cec.gatech.edu | github.com/gt-cec/tmm-hri | github.gatech.edu/isye-web/cec-tmm-hri | - | Kolb |
 | TMM-MAS | - | tmm-mas.cec.gatech.edu | github.com/gt-cec/tmm-mas | github.gatech.edu/isye-web/cec-tmm-mas | - | Alag |
 
-Most of our projects so far have used flask (Python) or JACO (Java).
+### Using a webserver for your project
+
+Most of our projects use flask (Python) or JACO (Java). Our projects typically require two sets of dependencies: system dependencies (`apt-get install XXX`) and language-specific libraries (`pip install XXX`).
+
+ISYE's VM runs Red Hat Enterprise Linux (RHEL). RHEL is Debian-based, like Ubuntu, so for most purposes they are identical. The most significant difference is that Ubuntu's package manager is called `apt`, while RHEL's is called `yum`. Most packages on Ubuntu have an equivalent on RHEL.
+
+For our projects to run on the VM, we need to include three files at the top level of our project.
+
+1. `pip-requirements.txt` is a simple list of `pip` packages to install, for example:
+
+```
+matplotlib
+opencv
+flask
+pygame
+numpy==1.0.2
+```
+
+Note how I specified a NumPy version. You can follow that format for any version-specific packages.
+
+2. `yum-requirements.txt` is a simple list of `yum` packages to install, for example:
+
+```
+pytorch
+```
 
 If your project does not already have an ISYE repo, email `helpdesk@isye.gatech.edu` and ask for a repo on the isye-web organization.
 
