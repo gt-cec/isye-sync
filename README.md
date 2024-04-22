@@ -122,13 +122,13 @@ You need the following from ISYE:
 
 Here is an example email you could send ISYE:
 
-*"Hi! I am a PhD student working with Karen Feigh in the Cognitive Engineering Center. We publicly host a few project demos through a VM managed by ISYE, and I am looking to add another project in the same manner.
+*"Hi! I am a PhD student working with Karen Feigh in the Cognitive Engineering Center. We publicly host a few project demos through a VM managed by ISYE, and I am looking to add another project in the same manner.*
 
-The project is codenamed ASMM, and its codebase is located at https://github.com/gt-cec/asmm. My GT username is jkolb6.
+*The project is codenamed ASMM, and its codebase is located at https://github.com/gt-cec/asmm. My GT username is jkolb6.*
 
-I believe the project needs a repo on the isye-web GitHub, a domain name (ideally asmm.cec.gatech.edu), and a port to configure my project's webserver to listen on.
+*I believe the project needs a repo on the isye-web GitHub, a domain name (ideally asmm.cec.gatech.edu), and a port to configure my project's webserver to listen on.*
 
-Would you be able to help me with this? Thanks!"*
+*Would you be able to help me with this? Thanks!"*
 
 ISYE's IT staff are lovely. If you are confused about how any of this works, first try to educate yourself (ChatGPT is very useful for general IT questions), second ask the labmates, and third ask them for clarification.
 
